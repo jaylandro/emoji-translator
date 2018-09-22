@@ -1,0 +1,9 @@
+body {
+  padding: 1em;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}

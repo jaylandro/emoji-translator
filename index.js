@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const translator = require('./translator')
+const translator = require('./server/translator')
 
 const port = process.env.PORT || 8080;
 
