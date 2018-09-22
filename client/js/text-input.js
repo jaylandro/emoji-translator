@@ -1,7 +1,7 @@
 const form = document.getElementById("et");
 const results = document.getElementById("results");
 
-function postData() {
+function postData(event) {
   const emojiInput = document.getElementById("emojify").value;
 
   event.preventDefault();
@@ -29,4 +29,4 @@ function postData() {
 }
 
 // attach event listener
-form.addEventListener("submit", postData, true);
+form.addEventListener("submit", postData(event), true);
