@@ -1,0 +1,24 @@
+{
+  "name": "emoji-translator",
+  "version": "1.0.0",
+  "description": "Translate words into emojis",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaylandro/emoji-translator.git"
+  },
+  "keywords": [
+    "emoji",
+    "whatthefunction",
+    "translator"
+  ],
+  "author": ":speak_no_evil: :memo: :mega: :smile_cat:",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaylandro/emoji-translator/issues"
+  },
+  "homepage": "https://github.com/jaylandro/emoji-translator#readme"
+}
