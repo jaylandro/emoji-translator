@@ -4,7 +4,6 @@ const results = document.getElementById("results");
 function postData(event) {
   const emojiInput = document.getElementById("emojify").value;
 
-  event.preventDefault();
   console.log(emojiInput)
   return fetch('/api/translate', {
       method: "POST",
