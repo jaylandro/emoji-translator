@@ -22,12 +22,12 @@ if (!('webkitSpeechRecognition' in window)) {
     console.log('final ', final_transcript)
     console.log(event.results)
     emojiInput.value = final_transcript;
-    postData();
   }
   recognition.onerror = function(event) {
     console.log('onerror: ',event);
   }
   recognition.onend = function() {
+    postData();
     console.log('onend: ', event);
   }
 }
