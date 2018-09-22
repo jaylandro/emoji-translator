@@ -29,4 +29,7 @@ function postData(event) {
 }
 
 // attach event listener
-form.addEventListener("submit", postData(event), true);
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  postData();
+}, true);
