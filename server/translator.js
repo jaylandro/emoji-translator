@@ -5,34 +5,44 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
+function getEmojis() {
+    // require emoji file
+    const emojis = require('emoji.json')
 
-// require emoji file
-const emojis = require('emoji.json')
+    // load emoji backend lookup
+    return emojis.reduce((acc, current) => {
+        // NOTE: If this doesn't work we can RegEx and then trim
+        // RegEx pattern [^|]+
+        const keywords = current.keywords.split('|').map(keyword => keyword.trim())
 
-// load emoji backend lookup
-// const emojiDictionary = emojis.reduce((array, current) => {
-//     if (array == null) {
-//         array = []
-//     }
+        for (var i = 0; i < keywords.length; i++) {
+            const keyword = keywords[i]
 
-//     // NOTE: If this doesn't work we can RegEx and then trim
-//     // RegEx pattern [^|]+
-//     const keywords = current.keywords.split('|').map(keyword => keyword.trim())
+            if (acc[keyword] == null) {
+                acc[keyword] = []
+            }
 
-//     array = [...keywords, array]
-// })
+            acc[keyword].push(current.char)
+        }
+
+        return acc
+    }, {})
+}
+
+const upsideDownEmojis = getEmojis()
 
 function parseInput(input) {
-    return []
+    console.log(input)
+    return input.split(' ')
 }
 
 function lookupFromDictionary(arr) {
-    return []
+    return arr.filter(item => upsideDownEmojis[item])
 }
 
 module.exports = {
     translate: function(input) {
-        return ['👋','🌎']
-        // return lookupFromDictionary(parseInput(input))
+        // return ['👋','🌎']
+        return lookupFromDictionary(parseInput(input))
     }
 }
