@@ -20,7 +20,7 @@ function postData() {
   })
   .then(data => {
     // results.innerHTML = data;
-    let resultAnchor = document.querySelectorById('results');
+    let resultAnchor = document.getElementById('results');
     let h = document.createElement("h2");
     h.innerHTML = emojiInput + data;
     resultAnchor.prepend(h);
