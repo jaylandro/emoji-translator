@@ -1,3 +1,6 @@
+let final_transcript;
+let emojiInput = document.getElementById;
+
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
@@ -9,7 +12,18 @@ if (!('webkitSpeechRecognition' in window)) {
     console.log('onstart: ',event);
   }
   recognition.onresult = function(event) {
-    console.log('onresult: ',event);
+    var interim_transcript = '';
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    
+    final_transcript = capitalize(final_transcript);
+    emojiInput.innerHTML = linebreak(final_transcript);
   }
   recognition.onerror = function(event) {
     console.log('onerror: ',event);
