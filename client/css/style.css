@@ -1,9 +1,25 @@
 body {
   padding: 1em;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;
+  /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;*/
+  background: url(/images/emoji-wallpaper.jpg);
+  background-size: cover;
   text-align: center;
 }
 
 input {
   text-align: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  border: 1px solid #999;
+  width: 80vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1em;
+  max-height: 90vh;
+  overflow: auto;
 }
