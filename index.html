@@ -10,52 +10,52 @@
 </head>
 
 <body>
-<h1>Emoji Translator</h1>
+  <h1>Emoji Translator</h1>
 
-<form id="et">
-  <label class="textfield">
-    <input type="text" id="emojify" name="translate">
-    <span class="textfield__label">Emojify me!</span>
-  </label>
-  <button type="submit">Submit</button>
-</form>
-<h2 id="results"></h2>
- <style>
-  body {
-    padding: 1em;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;
-    text-align: center;
-  }
-  input {
-    text-align: center;
-  }
- </style>
- <script>
-  const form = document.getElementById("et");
-  const emojiInput = document.getElementById("emojify").value;
-  const results = document.getElementById("results");
-  
-  function postData() {
-    event.preventDefault();
-    return fetch('/api/translate', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        body: emojiInput,
-    })
-    .then(response => {
-      return response.json()
-    })
-    .then(data => {
-      results.innerHTML = data;
-    })
-    .catch(error => console.error(error));
-  }
-  
-  // attach event listener
-  form.addEventListener("submit", postData, true);
- </script>
+  <form id="et">
+    <label class="textfield">
+      <input type="text" id="emojify" name="translate">
+      <span class="textfield__label">Emojify me!</span>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+  <h2 id="results"></h2>
+  <style>
+    body {
+      padding: 1em;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;
+      text-align: center;
+    }
+    input {
+      text-align: center;
+    }
+  </style>
+  <script>
+    const form = document.getElementById("et");
+    const emojiInput = document.getElementById("emojify").value;
+    const results = document.getElementById("results");
+    
+    function postData() {
+      event.preventDefault();
+      return fetch('/api/translate', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8",
+          },
+          body: emojiInput,
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        results.innerHTML = data;
+      })
+      .catch(error => console.error(error));
+    }
+    
+    // attach event listener
+    form.addEventListener("submit", postData, true);
+  </script>
 </body>
 
 </html>
