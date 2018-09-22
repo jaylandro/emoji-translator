@@ -10,6 +10,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.interimResults = true;
 
   recognition.onstart = function(event) {
+    emojiInput.value = '';
     console.log('onstart: ',event);
   }
   recognition.onresult = function(event) {
