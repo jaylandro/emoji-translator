@@ -37,7 +37,17 @@ function parseInput(input) {
 }
 
 function lookupFromDictionary(arr) {
-    return arr.filter(item => upsideDownEmojis[item])
+    const keywords = arr.filter(item => upsideDownEmojis[item])
+
+    const emojis = []
+
+    for (var i = 0; i < keywords.length; i++) {
+        const keyword = keywords[i]
+
+        emojis.push(upsideDownEmojis[keyword][0])
+    }
+
+    return emojis;
 }
 
 module.exports = {
