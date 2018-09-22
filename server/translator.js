@@ -27,7 +27,6 @@ let response_handler = function (response) {
     });
 };
 
-
 function getEmojis() {
     // require emoji file
     const emojis = require('emoji.json')
@@ -36,16 +35,22 @@ function getEmojis() {
     return emojis.reduce((acc, current) => {
         // NOTE: If this doesn't work we can RegEx and then trim
         // RegEx pattern [^|]+
-        const keywords = current.keywords.split('|').map(keyword => keyword.trim())
+        const keywords = current.keywords.split('|') //.map(keyword => keyword.trim())
 
         for (var i = 0; i < keywords.length; i++) {
-            const keyword = keywords[i]
-
-            if (acc[keyword] == null) {
+            var keyword = keywords[i].trim()
+            keyword = keyword.replace("”", "")
+            keyword = keyword.replace("'", "")
+            keyword = keyword.replace("“", "")
+            keyword = keyword.toLowerCase()
+            
+            if (keyword.indexOf(' ') < 0 && acc[keyword] == null) {
                 acc[keyword] = []
             }
 
-            acc[keyword].push(current.char)
+            if (acc[keyword]) {
+                acc[keyword].push(current.char)
+            }
         }
 
         return acc
@@ -53,6 +58,8 @@ function getEmojis() {
 }
 
 const upsideDownEmojis = getEmojis()
+
+console.log(upsideDownEmojis)
 
 function parseInput(input) {
     if (input != null && input.length) {
@@ -63,6 +70,7 @@ function parseInput(input) {
 }
 
 function lookupFromDictionary(arr) {
+    console.log('keywords in process "' + arr.join(',') + '"')
     const keywords = arr.filter(item => upsideDownEmojis[item])
 
     const emojis = []
@@ -70,6 +78,7 @@ function lookupFromDictionary(arr) {
     for (var i = 0; i < keywords.length; i++) {
         const keyword = keywords[i]
 
+        console.log('matched "' + keyword + '"')
         emojis.push(upsideDownEmojis[keyword][0])
     }
 
