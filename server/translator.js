@@ -43,7 +43,7 @@ function getEmojis() {
             keyword = keyword.replace("'", "")
             keyword = keyword.replace("“", "")
             keyword = keyword.toLowerCase()
-            
+
             if (keyword.indexOf(' ') < 0 && acc[keyword] == null) {
                 acc[keyword] = []
             }
@@ -59,7 +59,7 @@ function getEmojis() {
 
 const upsideDownEmojis = getEmojis()
 
-console.log(upsideDownEmojis)
+//console.log(upsideDownEmojis)
 
 function parseInput(input) {
     if (input != null && input.length) {
