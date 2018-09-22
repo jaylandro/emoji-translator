@@ -26,9 +26,17 @@ input {
 }
 
 #voiceButton svg {
-  margin-top: 15px;
+  vertical-align: middle;
 }
 
 #voiceButton {
   vertical-align: top;
+}
+
+#clear {
+  display: block;
+  float: right;
+  background-color: #999;
+  font-weight: bold;
+  margin-left: -90px;
 }

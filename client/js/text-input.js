@@ -24,7 +24,7 @@ function postData(event) {
   .then(data => {
     let formattedData = data.join("");
     let resultAnchor = document.getElementById('results');
-    let h = document.createElement("h2");
+    let h = document.createElement('h2');
     h.innerHTML = `${emojiInput}  ${formattedData}`;
     resultAnchor.prepend(h);
   })
