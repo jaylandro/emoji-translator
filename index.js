@@ -19,6 +19,9 @@ app.post('/api/translate/', (req, res) => {
     const input = req.body.input;
     const output = translator.translate(input)
     res.send(output)
+    // translator.translate(input, function(output){
+    //     res.send(output);
+    // })
 })
 
 app.listen(port, () => console.log(`👋 ${port}!`))

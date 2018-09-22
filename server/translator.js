@@ -1,4 +1,3 @@
-
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -7,25 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const uuidv4 = require('uuid/v4');
 
-let https = require ('https');
+let https = require('https');
 let accessKey = process.env.TEXT_ANALYTICS_KEY;
 let uri = process.env.TEXT_ANALYTICS_HOST;
 let path = process.env.TEXT_ANALYTICS_PATH;
-
-let response_handler = function (response) {
-    let body = '';
-    response.on ('data', function (d) {
-        body += d;
-    });
-    response.on ('end', function () {
-        let body_ = JSON.parse (body);
-        let body__ = JSON.stringify (body_, null, '  ');
-        console.log (body__);
-    });
-    response.on ('error', function (e) {
-        console.log ('Error: ' + e.message);
-    });
-};
 
 function getEmojis() {
     // require emoji file
@@ -63,6 +47,7 @@ const upsideDownEmojis = getEmojis()
 
 function parseInput(input) {
     if (input != null && input.length) {
+        // fetchKeyPhrases(input)
         return input.toLowerCase().split(' ')
     }
 
@@ -85,38 +70,58 @@ function lookupFromDictionary(arr) {
     return emojis;
 }
 
-function fetchKeyPhrases(input){
+function fetchKeyPhrases(input, cb) {
 
-        let body = JSON.stringify (createDocument(input))
-        let request_params = {
-            method : 'POST',
-            hostname : uri,
-            path : path + 'keyPhrases',
-            headers : {
-                'Ocp-Apim-Subscription-Key' : accessKey,
-            }
-        };
-    console.log(request_params);
-        let req = https.request (request_params, response_handler);
-        req.write (body);
-        req.end ();
+    let response_handler = function (response) {
+        let body = '';
+        response.on('data', function (d) {
+            body += d;
+        });
+        response.on('end', function () {
+            let body_ = JSON.parse(body);
+            let body__ = JSON.stringify(body_, null, '  ');
+            console.log(body__);
+            let analyzedWords = body_.documents[0].keyPhrases;
+            console.log(analyzedWords);
+            let emoList = lookupFromDictionary(analyzedWords);
+            cb(emoList);
+        });
+        response.on('error', function (e) {
+            console.log('Error: ' + e.message);
+        });
+    };
+
+
+    let body = JSON.stringify(createDocument(input))
+    let request_params = {
+        method: 'POST',
+        hostname: uri,
+        path: path + 'keyPhrases',
+        headers: {
+            'Ocp-Apim-Subscription-Key': accessKey,
+        }
+    };
+
+    let req = https.request(request_params, response_handler);
+
+    req.write(body);
+    req.end();
 }
 
-function createDocument(phrase){
+function createDocument(phrase) {
     return {
-        'documents' : [
-            {
-                'id': uuidv4(),
-                'language': 'en',
-                'text': phrase
-            }
-        ]
+        'documents': [{
+            'id': uuidv4(),
+            'language': 'en',
+            'text': phrase
+        }]
     };
 }
 
 module.exports = {
-    translate: function(input) {
+    translate: function (input) {
         // return ['👋','🌎']
         return lookupFromDictionary(parseInput(input))
+        // return fetchKeyPhrases('fire truck down house', cb)
     }
 }
