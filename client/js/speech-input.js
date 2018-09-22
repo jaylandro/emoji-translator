@@ -22,8 +22,8 @@ if (!('webkitSpeechRecognition' in window)) {
       }
     }
     
-    final_transcript = capitalize(final_transcript);
-    emojiInput.innerHTML = linebreak(final_transcript);
+    emojiInput.innerHTML = interim_transcript;
+    emojiInput.innerHTML = final_transcript;
   }
   recognition.onerror = function(event) {
     console.log('onerror: ',event);
