@@ -24,3 +24,11 @@ input {
   max-height: 90vh;
   overflow: auto;
 }
+
+#voiceButton svg {
+  margin-top: 15px;
+}
+
+#voiceButton {
+  vertical-align: top;
+}
