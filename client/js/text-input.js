@@ -20,6 +20,9 @@ function postData() {
   })
   .then(data => {
     results.innerHTML = data;
+    var h = document.createElement("h2");
+    h.innerHTML = emojiInput + data;
+    document.body.appendChild(h);
   })
   .catch(error => console.error(error));
 }
