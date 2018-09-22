@@ -1,3 +1,6 @@
+let final_transcript = '';
+let emojiInput = document.getElementById('emojify');
+
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
@@ -9,7 +12,16 @@ if (!('webkitSpeechRecognition' in window)) {
     console.log('onstart: ',event);
   }
   recognition.onresult = function(event) {
-    console.log('onresult: ',event);
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if(event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      }
+    }
+    
+    console.log('final ', final_transcript)
+    console.log(event.results)
+    emojiInput.value = final_transcript;
   }
   recognition.onerror = function(event) {
     console.log('onerror: ',event);
