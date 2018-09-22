@@ -15,12 +15,12 @@ function getEmojis() {
     // require emoji file
     const emojis = require('emoji.json')
     const synonyms = require('synonyms')
+    const uniqueKeywords = []
 
     // load emoji backend lookup
-    return emojis.reduce((acc, current) => {
-        // NOTE: If this doesn't work we can RegEx and then trim
-        // RegEx pattern [^|]+
-        const keywords = current.keywords.split('|') //.map(keyword => keyword.trim())
+    let emojiList = emojis.reduce((acc, current) => {
+        const keywords = current.keywords.split('|')
+
 
         for (var i = 0; i < keywords.length; i++) {
             var keyword = keywords[i].trim()
@@ -31,43 +31,57 @@ function getEmojis() {
 
             if (acc[keyword] == null) {
                 acc[keyword] = []
+                uniqueKeywords.push(keyword)
             }
 
             acc[keyword].push(current.char)
-
-            //query for sysnonymns
-            /*
-            let nounAndVerbSynonyms = synonyms(keyword)
-
-            let synonymList = []
-
-            if (nounAndVerbSynonyms.n != null) {
-                synonymList = synonymList.concat(nounAndVerbSynonyms.n)
-            }
-
-            if (nounAndVerbSynonyms.v != null) {
-                synonymList = synonymList.concat(nounAndVerbSynonyms.v)
-            }
-
-            for (var i = 0; i < synonymList.length; i++) {
-                var synonym = synonymList[i];
-
-                if (acc[synonym] == null) {
-                    acc[synonym] = []
-                }
-                
-                acc[synonym].push(current.char)
-            }
-            */
         }
 
         return acc
     }, {})
+
+
+    //query for sysnonymns
+    for (var x = 0; x < uniqueKeywords.length; x++) {
+        let uniqueKeyword = uniqueKeywords[x]
+
+        let nounAndVerbSynonyms = synonyms(uniqueKeywords[x])
+
+        if (nounAndVerbSynonyms != null) {
+            if (nounAndVerbSynonyms.n != null) {
+                for (var n = 0; n < nounAndVerbSynonyms.n.length; n++) {
+                    var noun = nounAndVerbSynonyms.n[n]
+                    if (emojiList[noun] == null) {
+                        emojiList[noun] = emojiList[uniqueKeyword]
+                    }
+                }
+            }
+
+            if (nounAndVerbSynonyms.v != null) {
+                for (var v = 0; v < nounAndVerbSynonyms.v.length; v++) {
+                    var verb = nounAndVerbSynonyms.v[v]
+                    if (emojiList[verb] == null) {
+                        emojiList[verb] = emojiList[uniqueKeyword]
+                    }
+                }
+            }
+
+            if (nounAndVerbSynonyms.s != null) { 
+                for (var s = 0; s < nounAndVerbSynonyms.s.length; s++) {
+                    var something = nounAndVerbSynonyms.s[s]
+                    if (emojiList[something] == null) {
+                        emojiList[something] = emojiList[uniqueKeyword]
+                    }
+                }
+            }
+        }
+    }
+
+
+    return emojiList
 }
 
 const upsideDownEmojis = getEmojis()
-
-//console.log(upsideDownEmojis)
 
 function parseInput(input) {
     if (input != null && input.length) {
