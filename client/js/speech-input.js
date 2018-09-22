@@ -1,5 +1,5 @@
-let final_transcript;
-let emojiInput = document.getElementById;
+let final_transcript = '';
+let emojiInput = document.getElementById('emojify');
 
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
