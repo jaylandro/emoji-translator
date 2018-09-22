@@ -19,10 +19,11 @@ function postData() {
     return response.json()
   })
   .then(data => {
-    results.innerHTML = data;
-    var h = document.createElement("h2");
+    // results.innerHTML = data;
+    let resultAnchor = document.getElementById('results');
+    let h = document.createElement("h2");
     h.innerHTML = emojiInput + data;
-    document.body.appendChild(h);
+    resultAnchor.prepend(h);
   })
   .catch(error => console.error(error));
 }
