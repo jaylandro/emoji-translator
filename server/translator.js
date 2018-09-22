@@ -1,6 +1,11 @@
 
 'use strict';
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+}
+
+
 // require emoji file
 const emojis = require('emoji.json')
 
