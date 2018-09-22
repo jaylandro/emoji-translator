@@ -4,6 +4,7 @@
   "description": "Translate words into emojis",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "test"
   },
   "repository": {
