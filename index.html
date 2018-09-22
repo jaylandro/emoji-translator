@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cutestrap/1.3.1/css/cutestrap.min.css">
-  
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -20,42 +20,6 @@
     <button type="submit">Submit</button>
   </form>
   <h2 id="results"></h2>
-  <style>
-    body {
-      padding: 1em;
-      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMANrkpWKEAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVAiZY2AgCTwAAAEQAOFwuZEGAAAAAElFTkSuQmCC) repeat left top;
-      text-align: center;
-    }
-    input {
-      text-align: center;
-    }
-  </style>
-  <script>
-    const form = document.getElementById("et");
-    const emojiInput = document.getElementById("emojify").value;
-    const results = document.getElementById("results");
-    
-    function postData() {
-      event.preventDefault();
-      return fetch('/api/translate', {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json; charset=utf-8",
-          },
-          body: emojiInput,
-      })
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        results.innerHTML = data;
-      })
-      .catch(error => console.error(error));
-    }
-    
-    // attach event listener
-    form.addEventListener("submit", postData, true);
-  </script>
+  <script src="js/text-input.js"></script>
 </body>
-
 </html>

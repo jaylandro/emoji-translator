@@ -5,6 +5,8 @@ const translator = require('./translator')
 
 const port = process.env.PORT || 8080;
 
+app.use(express.static('client'));
+
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
