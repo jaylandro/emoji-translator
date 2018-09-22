@@ -14,7 +14,9 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onresult = function(event) {
 
     for (var i = event.resultIndex; i < event.results.length; ++i) {
-      final_transcript += event.results[i][0].transcript;
+      if(event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      }
     }
     
     console.log('final ', final_transcript)
