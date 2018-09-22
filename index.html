@@ -12,18 +12,44 @@
 <body>
 <h1>&#x1F354 Emoji Translator</h1>
 
-<form>
+<form id="et">
   <label class="textfield">
-    <input type="text" name="translate">
+    <input type="text" id="emojify" name="translate">
     <span class="textfield__label">Emojify me!</span>
   </label>
   <button type="submit">Submit</button>
 </form>
+<h2 id="results"></h2>
  <style>
   body {
     padding: 1em;
   }
  </style>
+ <script>
+  const form = document.getElementById("et");
+  const emojiInput = document.getElementById("emojify");
+  const results = document.getElementById("results");
+  
+  function postData(url = '/api/translate', data = emojiInput.value) {
+    return fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      results.innerHTML = data;
+    })
+    .catch(error => console.error(error));
+  }
+  
+  // attach event listener
+  form.addEventListener("submit", postData, true);
+ </script>
 </body>
 
 </html>
