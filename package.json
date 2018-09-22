@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/jaylandro/emoji-translator/issues"
   },
-  "homepage": "https://github.com/jaylandro/emoji-translator#readme"
+  "homepage": "https://github.com/jaylandro/emoji-translator#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
