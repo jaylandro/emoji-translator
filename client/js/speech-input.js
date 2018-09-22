@@ -1,12 +1,11 @@
 let final_transcript = '';
 let emojiInput = document.getElementById('emojify');
 
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-
-if (!(SpeechRecognition)) {
-  console.warn('Speech recognition not supported by your browser')
+if (!('webkitSpeechRecognition' in window)) {
+  document.getElementById('voiceButton').style.display = "none"
+  console.warn('Speech recognition is not supported in your browser :(')
 } else {
-  var recognition = new SpeechRecognition();
+  var recognition = new webkitSpeechRecognition();
   recognition.continuous = false;
   recognition.interimResults = true;
 
@@ -26,7 +25,7 @@ if (!(SpeechRecognition)) {
     emojiInput.value = final_transcript;
   }
   recognition.onerror = function(event) {
-    console.log('onerror: ', event);
+    console.log('onerror: ',event);
   }
   recognition.onend = function() {
     postData();
