@@ -14,6 +14,7 @@ let path = process.env.TEXT_ANALYTICS_PATH;
 function getEmojis() {
     // require emoji file
     const emojis = require('emoji.json')
+    const synonyms = require('synonyms')
 
     // load emoji backend lookup
     return emojis.reduce((acc, current) => {
@@ -28,13 +29,36 @@ function getEmojis() {
             keyword = keyword.replace("“", "")
             keyword = keyword.toLowerCase()
 
-            if (keyword.indexOf(' ') < 0 && acc[keyword] == null) {
+            if (acc[keyword] == null) {
                 acc[keyword] = []
             }
 
-            if (acc[keyword]) {
-                acc[keyword].push(current.char)
+            acc[keyword].push(current.char)
+
+            //query for sysnonymns
+            /*
+            let nounAndVerbSynonyms = synonyms(keyword)
+
+            let synonymList = []
+
+            if (nounAndVerbSynonyms.n != null) {
+                synonymList = synonymList.concat(nounAndVerbSynonyms.n)
             }
+
+            if (nounAndVerbSynonyms.v != null) {
+                synonymList = synonymList.concat(nounAndVerbSynonyms.v)
+            }
+
+            for (var i = 0; i < synonymList.length; i++) {
+                var synonym = synonymList[i];
+
+                if (acc[synonym] == null) {
+                    acc[synonym] = []
+                }
+                
+                acc[synonym].push(current.char)
+            }
+            */
         }
 
         return acc
