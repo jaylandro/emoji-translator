@@ -36,7 +36,9 @@ function getEmojis() {
             acc[keyword].push(current.char)
 
             //query for sysnonymns
+            /*
             let nounAndVerbSynonyms = synonyms(keyword)
+
             let synonymList = []
 
             if (nounAndVerbSynonyms.n != null) {
@@ -53,9 +55,10 @@ function getEmojis() {
                 if (acc[synonym] == null) {
                     acc[synonym] = []
                 }
-
+                
                 acc[synonym].push(current.char)
             }
+            */
         }
 
         return acc
