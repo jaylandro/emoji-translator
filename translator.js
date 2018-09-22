@@ -10,6 +10,8 @@ const emojis = require('emoji.json')
 //         array = []
 //     }
 
+//     // NOTE: If this doesn't work we can RegEx and then trim
+//     // RegEx pattern [^|]+
 //     const keywords = current.keywords.split('|').map(keyword => keyword.trim())
 
 //     array = [...keywords, array]
