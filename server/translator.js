@@ -55,8 +55,12 @@ function getEmojis() {
 const upsideDownEmojis = getEmojis()
 
 function parseInput(input) {
-    console.log(input)
-    return input.split(' ')
+    if (input != null && input.length) {
+        console.log(input)
+        return input.toLowerCase().split(' ')
+    }
+
+    return []
 }
 
 function lookupFromDictionary(arr) {
