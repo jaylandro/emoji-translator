@@ -101,8 +101,15 @@ function lookupFromDictionary(arr) {
     for (var i = 0; i < keywords.length; i++) {
         const keyword = keywords[i]
 
-        console.log('matched "' + keyword + '"')
-        emojis.push(upsideDownEmojis[keyword][0])
+        const emojiLength = upsideDownEmojis[keyword].length;
+
+        const randomEmoji = Math.floor(Math.random() * emojiLength);
+
+        const emoji = upsideDownEmojis[keyword][randomEmoji];
+
+        console.log('matched ' + keyword + ': ' + emoji)
+
+        emojis.push(emoji)
     }
 
     return emojis;
