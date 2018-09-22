@@ -31,6 +31,7 @@
   const results = document.getElementById("results");
   
   function postData(url = '/api/translate', data = emojiInput.value) {
+    event.preventDefault();
     return fetch(url, {
         method: "POST",
         headers: {
