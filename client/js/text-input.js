@@ -18,10 +18,10 @@ function postData(event) {
     return response.json()
   })
   .then(data => {
-    // results.innerHTML = data;
+    let formattedData = data.join("");
     let resultAnchor = document.getElementById('results');
     let h = document.createElement("h2");
-    h.innerHTML = emojiInput + data;
+    h.innerHTML = `${emojiInput}  ${formattedData}`;
     resultAnchor.prepend(h);
   })
   .catch(error => console.error(error));
