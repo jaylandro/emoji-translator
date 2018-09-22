@@ -55,12 +55,25 @@ function getEmojis() {
 const upsideDownEmojis = getEmojis()
 
 function parseInput(input) {
-    console.log(input)
-    return input.split(' ')
+    if (input != null && input.length) {
+        return input.toLowerCase().split(' ')
+    }
+
+    return []
 }
 
 function lookupFromDictionary(arr) {
-    return arr.filter(item => upsideDownEmojis[item])
+    const keywords = arr.filter(item => upsideDownEmojis[item])
+
+    const emojis = []
+
+    for (var i = 0; i < keywords.length; i++) {
+        const keyword = keywords[i]
+
+        emojis.push(upsideDownEmojis[keyword][0])
+    }
+
+    return emojis;
 }
 
 function fetchKeyPhrases(input){
